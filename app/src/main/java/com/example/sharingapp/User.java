@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * User class
  */
-public class User {
+public class User extends Observable{
     private String username;
     private String email;
     private String id;

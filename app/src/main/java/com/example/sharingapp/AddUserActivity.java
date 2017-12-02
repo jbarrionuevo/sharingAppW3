@@ -16,6 +16,7 @@ public class AddUserActivity extends AppCompatActivity {
 
     private EditText username;
     private EditText email;
+    private UserController userController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class AddUserActivity extends AppCompatActivity {
 
         context = getApplicationContext();
         user_list.loadUsers(context);
+
+        userController = new UserController();
     }
 
     public void saveUser(View view) {

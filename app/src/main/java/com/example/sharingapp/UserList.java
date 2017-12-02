@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * UserList Class
  */
-public class UserList {
+public class UserList extends Observable{
 
     private static ArrayList<User> users;
     private String FILENAME = "user_file.sav";

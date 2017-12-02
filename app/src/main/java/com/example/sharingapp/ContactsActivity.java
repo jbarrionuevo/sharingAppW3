@@ -24,6 +24,7 @@ public class ContactsActivity extends AppCompatActivity {
     private Context context;
     private ItemList item_list = new ItemList();
     private UserList active_borrowers_list = new UserList();
+    private UserListController userListController = new UserListController();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class ContactsActivity extends AppCompatActivity {
         adapter = new UserAdapter(ContactsActivity.this, user_list.getUsers());
         my_contacts.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        userListController = new UserListController();
 
         // When user is long clicked, this starts EditUserActivity
         my_contacts.setOnItemLongClickListener(new android.widget.AdapterView.OnItemLongClickListener() {
