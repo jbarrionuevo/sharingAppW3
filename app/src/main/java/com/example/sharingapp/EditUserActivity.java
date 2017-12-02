@@ -12,13 +12,14 @@ import android.widget.EditText;
  * user's id.
  * Note: You will not be able contacts which are "active" borrowers
  */
-public class EditUserActivity extends AppCompatActivity {
+public class EditUserActivity extends AppCompatActivity implements Observer{
 
     private UserList user_list = new UserList();
     private User user;
     private EditText email;
     private EditText username;
     private Context context;
+    private UserController userController​ = new UserController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,8 @@ public class EditUserActivity extends AppCompatActivity {
 
         username.setText(user.getUsername());
         email.setText(user.getEmail());
+
+        userController​.addObserver(this);
     }
 
     public void saveUser(View view) {
@@ -67,13 +70,17 @@ public class EditUserActivity extends AppCompatActivity {
         User updated_user = new User(username_str, email_str, id);
 
         // Edit user
-        EditUserCommand edit_user_command = new EditUserCommand(user_list, user, updated_user, context);
-        edit_user_command.execute();
+        //EditUserCommand edit_user_command = new EditUserCommand(user_list, user, updated_user, context);
+        //edit_user_command.execute();
 
-        boolean success = edit_user_command.isExecuted();
+        //boolean success = edit_user_command.isExecuted();
+
+        boolean success = userController​.editUser(user_list, user, updated_user, context);
         if (!success){
             return;
         }
+
+        userController​.removeObserver(this);
 
         // End EditUserActivity
         finish();
@@ -92,5 +99,10 @@ public class EditUserActivity extends AppCompatActivity {
 
         // End EditUserActivity
         finish();
+    }
+
+    @Override
+    public void update() {
+
     }
 }

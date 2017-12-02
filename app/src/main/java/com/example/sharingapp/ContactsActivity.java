@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Displays ListView of all contacts
  * Note: You will not be able to edit/delete contacts which are "active" borrowers
  */
-public class ContactsActivity extends AppCompatActivity {
+public class ContactsActivity extends AppCompatActivity implements Observer{
 
     private UserList user_list = new UserList();
     private ListView my_contacts;
@@ -89,5 +89,10 @@ public class ContactsActivity extends AppCompatActivity {
     public void addUserActivity(View view){
         Intent intent = new Intent(getApplicationContext(), AddUserActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void update() {
+
     }
 }
