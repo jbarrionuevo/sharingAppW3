@@ -94,16 +94,21 @@ public class EditUserActivity extends AppCompatActivity implements Observer{
     }
 
     public void deleteUser(View view) {
-
+        System.out.println("deleteUser 1-------------------------");
         // Delete user
-        DeleteUserCommand delete_user_command = new DeleteUserCommand(user_list, user, context);
-        delete_user_command.execute();
+        //DeleteUserCommand delete_user_command = new DeleteUserCommand(user_list, user, context);
+        //delete_user_command.execute();
 
-        boolean success = delete_user_command.isExecuted();
+        //boolean success = delete_user_command.isExecuted();
+
+        boolean success = userListController​.deleteUser(user_list, user, context);
         if (!success){
             return;
         }
+        System.out.println("deleteUser 2-------------------------");
+        userListController​.removeObserver(this);
 
+        System.out.println("deleteUser 3-------------------------");
         // End EditUserActivity
         finish();
     }
