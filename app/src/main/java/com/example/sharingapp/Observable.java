@@ -7,6 +7,7 @@ public class Observable {
     List<Observer> observers = new ArrayList<Observer>();
 
     public void addObserver(Observer observer){
+        System.out.println("Observable.addObserver 1-------------------------");
         observers.add(observer);
     }
 

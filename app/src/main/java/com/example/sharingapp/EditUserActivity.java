@@ -14,12 +14,13 @@ import android.widget.EditText;
  */
 public class EditUserActivity extends AppCompatActivity implements Observer{
 
-    private UserList user_list = new UserList();
+    //private UserList user_list = new UserList();
     private User user;
     private EditText email;
     private EditText username;
     private Context context;
-    private UserController userController​ = new UserController();
+    private UserList user_list = new UserList();
+    private UserListController userListController​ = new UserListController(user_list);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,13 @@ public class EditUserActivity extends AppCompatActivity implements Observer{
         username.setText(user.getUsername());
         email.setText(user.getEmail());
 
-        userController​.addObserver(this);
+        System.out.println("onCreate 1-------------------------");
+        userListController​.addObserver(this);
+        System.out.println("onCreate 2-------------------------");
     }
 
     public void saveUser(View view) {
-
+        System.out.println("saveUser 1-------------------------");
         String email_str = email.getText().toString();
 
         if (email_str.equals("")) {
@@ -68,22 +71,26 @@ public class EditUserActivity extends AppCompatActivity implements Observer{
 
         String id = user.getId(); // Reuse the user id
         User updated_user = new User(username_str, email_str, id);
-
+        System.out.println("saveUser 2-------------------------");
         // Edit user
         //EditUserCommand edit_user_command = new EditUserCommand(user_list, user, updated_user, context);
         //edit_user_command.execute();
 
         //boolean success = edit_user_command.isExecuted();
 
-        boolean success = userController​.editUser(user_list, user, updated_user, context);
+        boolean success = userListController​.editUser(user_list, user, updated_user, context);
         if (!success){
+            System.out.println("saveUser 3-------------------------");
             return;
         }
 
-        userController​.removeObserver(this);
+        System.out.println("saveUser 4-------------------------");
+        userListController​.removeObserver(this);
 
+        System.out.println("saveUser 5-------------------------");
         // End EditUserActivity
         finish();
+        System.out.println("saveUser 6-------------------------");
     }
 
     public void deleteUser(View view) {
